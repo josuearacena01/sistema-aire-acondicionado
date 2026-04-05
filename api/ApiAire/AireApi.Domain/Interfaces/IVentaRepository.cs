@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AireApi.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,8 @@ namespace AireApi.Domain.Interfaces
 {
     public interface IVentaRepository
     {
-        Task<IEnumerable<dynamic>> GetAllAsync();
-        Task<dynamic?> GetByIdAsync(int id);
-        Task<dynamic?> RegistrarVentaAsync(int idCliente, int idUsuario, string productosJson, string metodoPago);
+        Task<IEnumerable<Venta>> GetAllAsync();
+        Task<Venta?> GetByIdAsync(int id);
+        Task<VentaResult?> RegistrarVentaAsync(int idCliente, int idUsuario, string productosJson, string metodoPago);
     }
 }
