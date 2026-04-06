@@ -1,18 +1,19 @@
-﻿using AireApi.Domain.Entities;
+﻿using AireApi.Application.DTOs;
+using AireApi.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AireApi.Domain.Interfaces
+namespace AireApi.Application.Services
 {
-    public interface IProductoRepository
+    public interface IProductoService
     {
         Task<IEnumerable<ProductoView>> GetAllAsync();
         Task<ProductoView?> GetByIdAsync(int id);
         Task<IEnumerable<ProductoView>> GetByCategoriaAsync(int idCategoria);
-        Task<int> CreateAsync(Producto producto);
-        Task<bool> UpdateAsync(Producto producto);
+        Task<int> CreateAsync(CreateProductoDto dto);
+        Task<bool> UpdateAsync(int id, UpdateProductoDto dto);
     }
 }
