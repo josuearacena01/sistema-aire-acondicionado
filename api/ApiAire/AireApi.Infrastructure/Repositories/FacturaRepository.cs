@@ -47,13 +47,5 @@ namespace AireApi.Infrastructure.Repositories
             var rows = await conn.ExecuteAsync(sql, new { IdFactura = idFactura });
             return rows > 0;
         }
-
-        public async Task<bool> ReactivarAsync(int idFactura)
-        {
-            using var conn = _db.CreateConnection();
-            var sql = "UPDATE aire.Facturas SET IdEstadoFactura = 2 WHERE IdFactura = @IdFactura AND IdEstadoFactura = 3";
-            var rows = await conn.ExecuteAsync(sql, new { IdFactura = idFactura });
-            return rows > 0;
-        }
     }
 }

@@ -28,8 +28,5 @@ namespace AireApi.Application.Services
 
         public async Task<bool> AnularAsync(int idFactura)
             => await _repo.AnularAsync(idFactura);
-
-        public async Task<bool> ReactivarAsync(int idFactura)
-        => await _repo.ReactivarAsync(idFactura);
     }
 }

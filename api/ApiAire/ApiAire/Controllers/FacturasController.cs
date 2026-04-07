@@ -35,11 +35,4 @@ public class FacturasController : ControllerBase
         var result = await _service.AnularAsync(id);
         return result ? NoContent() : NotFound();
     }
-
-    [HttpPut("{id}/reactivar")]
-    public async Task<IActionResult> Reactivar(int id)
-    {
-        var result = await _service.ReactivarAsync(id);
-        return result ? NoContent() : NotFound();
-    }
 }

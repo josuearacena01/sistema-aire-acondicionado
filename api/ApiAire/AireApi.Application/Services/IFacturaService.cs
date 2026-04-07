@@ -13,6 +13,5 @@ namespace AireApi.Application.Services
         Task<FacturaView?> GetByIdAsync(int id);
         Task<IEnumerable<FacturaView>> GetByClienteAsync(int idCliente);
         Task<bool> AnularAsync(int idFactura);
-        Task<bool> ReactivarAsync(int idFactura);
     }
 }
