@@ -66,5 +66,15 @@ namespace AireApi.Infrastructure.Repositories
             var rows = await conn.ExecuteAsync(sql, new { IdServicio = idServicio, Total = total });
             return rows > 0;
         }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            using var conn = _db.CreateConnection();
+            // Solo borrar si está en estado Pendiente (1)
+            var sql = @"DELETE FROM aire.DetalleServicios WHERE IdServicio = @Id;
+                    DELETE FROM aire.Servicios WHERE IdServicio = @Id AND IdEstadoServicio = 1";
+            var rows = await conn.ExecuteAsync(sql, new { Id = id });
+            return rows > 0;
+        }
     }
 }

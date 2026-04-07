@@ -23,7 +23,9 @@ namespace AireApi.Infrastructure.Repositories
         {
             using var conn = _db.CreateConnection();
             return await conn.QueryAsync<Pago>(
-                "SELECT * FROM aire.Pagos WHERE IdFactura = @IdFactura",
+                @"SELECT IdPago, IdFactura, IdUsuario, MetodoPago, Monto,
+              Fecha_Pago AS FechaPago
+              FROM aire.Pagos WHERE IdFactura = @IdFactura",
                 new { IdFactura = idFactura });
         }
 

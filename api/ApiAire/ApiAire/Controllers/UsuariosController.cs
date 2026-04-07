@@ -37,7 +37,7 @@ public class UsuariosController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] UpdateUsuarioDto dto)
     {
         var result = await _service.UpdateAsync(id, dto);
-        return result ? Ok() : NotFound();
+        return result ? NoContent() : NotFound();
     }
 
     [HttpPost("login")]

@@ -11,5 +11,7 @@ namespace AireApi.Domain.Interfaces
     {
         Task<IEnumerable<DetalleServicio>> GetByServicioAsync(int idServicio);
         Task<int> CreateAsync(DetalleServicio detalle);
+        Task<bool> UpdateAsync(DetalleServicio detalle);
+        Task<bool> DeleteAsync(int id);
     }
 }

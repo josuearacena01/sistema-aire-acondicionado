@@ -44,6 +44,6 @@ public class ClientesController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] UpdateClienteDto dto)
     {
         var result = await _service.UpdateAsync(id, dto);
-        return result ? Ok() : NotFound();
+        return result ? NoContent() : NotFound();
     }
 }

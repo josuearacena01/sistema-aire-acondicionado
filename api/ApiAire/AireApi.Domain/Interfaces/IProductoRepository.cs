@@ -14,5 +14,6 @@ namespace AireApi.Domain.Interfaces
         Task<IEnumerable<ProductoView>> GetByCategoriaAsync(int idCategoria);
         Task<int> CreateAsync(Producto producto);
         Task<bool> UpdateAsync(Producto producto);
+        Task<bool> DeactivateAsync(int id);
     }
 }

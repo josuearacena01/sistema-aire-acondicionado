@@ -13,5 +13,6 @@ namespace AireApi.Domain.Interfaces
         Task<FacturaView?> GetByIdAsync(int id);
         Task<IEnumerable<FacturaView>> GetByClienteAsync(int idCliente);
         Task<bool> AnularAsync(int idFactura);
+        Task<bool> ReactivarAsync(int idFactura);
     }
 }

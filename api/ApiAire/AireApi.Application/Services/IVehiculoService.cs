@@ -13,5 +13,6 @@ namespace AireApi.Application.Services
         Task<IEnumerable<Vehiculo>> GetAllAsync();
         Task<Vehiculo?> GetByIdAsync(int id);
         Task<int> CreateAsync(CreateVehiculoDto dto);
+        Task<bool> UpdateAsync(int id, CreateVehiculoDto dto);
     }
 }

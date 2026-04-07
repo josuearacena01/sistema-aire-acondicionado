@@ -15,5 +15,6 @@ namespace AireApi.Application.Services
         Task<IEnumerable<ProductoView>> GetByCategoriaAsync(int idCategoria);
         Task<int> CreateAsync(CreateProductoDto dto);
         Task<bool> UpdateAsync(int id, UpdateProductoDto dto);
+        Task<bool> DeactivateAsync(int id);
     }
 }

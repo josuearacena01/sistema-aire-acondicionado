@@ -12,5 +12,7 @@ namespace AireApi.Application.Services
     {
         Task<IEnumerable<DetalleServicio>> GetByServicioAsync(int idServicio);
         Task<int> CreateAsync(CreateDetalleServicioDto dto);
+        Task<bool> UpdateAsync(int id, CreateDetalleServicioDto dto);
+        Task<bool> DeleteAsync(int id, int idServicio);
     }
 }

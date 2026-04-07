@@ -15,5 +15,6 @@ namespace AireApi.Domain.Interfaces
         Task<int> CreateAsync(Servicio servicio);
         Task<bool> UpdateEstadoAsync(int idServicio, int idEstadoServicio);
         Task<bool> UpdateTotalAsync(int idServicio, decimal total);
+        Task<bool> DeleteAsync(int id);
     }
 }

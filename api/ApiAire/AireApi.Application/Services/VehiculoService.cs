@@ -34,5 +34,17 @@ namespace AireApi.Application.Services
             };
             return await _repo.CreateAsync(vehiculo);
         }
+
+        public async Task<bool> UpdateAsync(int id, CreateVehiculoDto dto)
+        {
+            var vehiculo = await _repo.GetByIdAsync(id);
+            if (vehiculo == null) return false;
+
+            vehiculo.IdMarca = dto.IdMarca;
+            vehiculo.IdModelo = dto.IdModelo;
+            vehiculo.Anio = dto.Anio;
+
+            return await _repo.UpdateAsync(vehiculo);
+        }
     }
 }

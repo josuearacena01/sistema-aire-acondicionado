@@ -15,5 +15,6 @@ namespace AireApi.Application.Services
         Task<IEnumerable<ServicioView>> GetByClienteAsync(int idCliente);
         Task<int> CreateAsync(CreateServicioDto dto);
         Task<bool> UpdateEstadoAsync(int idServicio, int idEstadoServicio);
+        Task<bool> DeleteAsync(int id);
     }
 }

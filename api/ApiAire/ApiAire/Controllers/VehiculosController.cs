@@ -32,4 +32,11 @@ public class VehiculosController : ControllerBase
         var id = await _service.CreateAsync(dto);
         return CreatedAtAction(nameof(GetById), new { id }, new { id });
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] CreateVehiculoDto dto)
+    {
+        var result = await _service.UpdateAsync(id, dto);
+        return result ? NoContent() : NotFound();
+    }
 }

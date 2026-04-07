@@ -53,5 +53,8 @@ namespace AireApi.Application.Services
             };
             return await _repo.UpdateAsync(producto);
         }
+
+        public async Task<bool> DeactivateAsync(int id)
+        => await _repo.DeactivateAsync(id);
     }
 }

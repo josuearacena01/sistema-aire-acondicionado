@@ -41,6 +41,13 @@ public class ProductosController : ControllerBase
     public async Task<IActionResult> Update(int id, [FromBody] UpdateProductoDto dto)
     {
         var result = await _service.UpdateAsync(id, dto);
-        return result ? Ok() : NotFound();
+        return result ? NoContent() : NotFound();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Deactivate(int id)
+    {
+        var result = await _service.DeactivateAsync(id);
+        return result ? NoContent() : NotFound();
     }
 }

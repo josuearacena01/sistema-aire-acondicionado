@@ -42,5 +42,8 @@ namespace AireApi.Application.Services
 
         public async Task<bool> UpdateEstadoAsync(int idServicio, int idEstadoServicio)
             => await _repo.UpdateEstadoAsync(idServicio, idEstadoServicio);
+
+        public async Task<bool> DeleteAsync(int id)
+        => await _repo.DeleteAsync(id);
     }
 }

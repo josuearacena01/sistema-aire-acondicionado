@@ -23,14 +23,19 @@ namespace AireApi.Infrastructure.Repositories
         public async Task<IEnumerable<Venta>> GetAllAsync()
         {
             using var conn = _db.CreateConnection();
-            return await conn.QueryAsync<Venta>("SELECT * FROM aire.Ventas");
+            return await conn.QueryAsync<Venta>(
+                @"SELECT IdVenta, IdCliente, IdUsuario, 
+              Fecha_Venta AS FechaVenta, Total_Venta AS TotalVenta 
+              FROM aire.Ventas");
         }
 
         public async Task<Venta?> GetByIdAsync(int id)
         {
             using var conn = _db.CreateConnection();
             return await conn.QueryFirstOrDefaultAsync<Venta>(
-                "SELECT * FROM aire.Ventas WHERE IdVenta = @Id", new { Id = id });
+                @"SELECT IdVenta, IdCliente, IdUsuario, 
+              Fecha_Venta AS FechaVenta, Total_Venta AS TotalVenta 
+              FROM aire.Ventas WHERE IdVenta = @Id", new { Id = id });
         }
 
         public async Task<VentaResult?> RegistrarVentaAsync(int idCliente, int idUsuario, string productosJson, string metodoPago)

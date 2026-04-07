@@ -41,6 +41,13 @@ public class ServiciosController : ControllerBase
     public async Task<IActionResult> UpdateEstado(int id, int idEstadoServicio)
     {
         var result = await _service.UpdateEstadoAsync(id, idEstadoServicio);
-        return result ? Ok() : NotFound();
+        return result ? NoContent() : NotFound();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var result = await _service.DeleteAsync(id);
+        return result ? NoContent() : BadRequest("Solo se pueden eliminar servicios en estado Pendiente");
     }
 }

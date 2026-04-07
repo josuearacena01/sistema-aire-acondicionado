@@ -25,4 +25,18 @@ public class DetalleServiciosController : ControllerBase
         var id = await _service.CreateAsync(dto);
         return Ok(new { id });
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, [FromBody] CreateDetalleServicioDto dto)
+    {
+        var result = await _service.UpdateAsync(id, dto);
+        return result ? NoContent() : NotFound();
+    }
+
+    [HttpDelete("{id}/servicio/{idServicio}")]
+    public async Task<IActionResult> Delete(int id, int idServicio)
+    {
+        var result = await _service.DeleteAsync(id, idServicio);
+        return result ? NoContent() : NotFound();
+    }
 }

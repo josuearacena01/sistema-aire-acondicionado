@@ -23,7 +23,9 @@ namespace AireApi.Infrastructure.Repositories
         {
             using var conn = _db.CreateConnection();
             return await conn.QueryAsync<DetalleServicio>(
-                "SELECT * FROM aire.DetalleServicios WHERE IdServicio = @IdServicio",
+                @"SELECT IdDetalleServicio, IdServicio, IdTipoServicio, 
+              Precio_Servicio AS PrecioServicio 
+              FROM aire.DetalleServicios WHERE IdServicio = @IdServicio",
                 new { IdServicio = idServicio });
         }
 
@@ -34,6 +36,24 @@ namespace AireApi.Infrastructure.Repositories
             VALUES (@IdServicio, @IdTipoServicio, @PrecioServicio);
             SELECT CAST(SCOPE_IDENTITY() AS INT)";
             return await conn.QuerySingleAsync<int>(sql, detalle);
+        }
+
+        public async Task<bool> UpdateAsync(DetalleServicio detalle)
+        {
+            using var conn = _db.CreateConnection();
+            var sql = @"UPDATE aire.DetalleServicios SET 
+            IdTipoServicio = @IdTipoServicio, Precio_Servicio = @PrecioServicio
+            WHERE IdDetalleServicio = @IdDetalleServicio";
+            var rows = await conn.ExecuteAsync(sql, detalle);
+            return rows > 0;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            using var conn = _db.CreateConnection();
+            var sql = "DELETE FROM aire.DetalleServicios WHERE IdDetalleServicio = @Id";
+            var rows = await conn.ExecuteAsync(sql, new { Id = id });
+            return rows > 0;
         }
     }
 }

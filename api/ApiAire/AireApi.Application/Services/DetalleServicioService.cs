@@ -40,5 +40,40 @@ namespace AireApi.Application.Services
 
             return id;
         }
+
+        public async Task<bool> UpdateAsync(int id, CreateDetalleServicioDto dto)
+        {
+            var detalle = new DetalleServicio
+            {
+                IdDetalleServicio = id,
+                IdServicio = dto.IdServicio,
+                IdTipoServicio = dto.IdTipoServicio,
+                PrecioServicio = dto.PrecioServicio
+            };
+            var result = await _repo.UpdateAsync(detalle);
+
+            if (result)
+            {
+                var detalles = await _repo.GetByServicioAsync(dto.IdServicio);
+                var total = detalles.Sum(d => d.PrecioServicio);
+                await _servicioRepo.UpdateTotalAsync(dto.IdServicio, total);
+            }
+
+            return result;
+        }
+
+        public async Task<bool> DeleteAsync(int id, int idServicio)
+        {
+            var result = await _repo.DeleteAsync(id);
+
+            if (result)
+            {
+                var detalles = await _repo.GetByServicioAsync(idServicio);
+                var total = detalles.Sum(d => d.PrecioServicio);
+                await _servicioRepo.UpdateTotalAsync(idServicio, total);
+            }
+
+            return result;
+        }
     }
 }
