@@ -1,6 +1,0 @@
-@ApiAire_HostAddress = http://localhost:5152
-
-GET {{ApiAire_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
