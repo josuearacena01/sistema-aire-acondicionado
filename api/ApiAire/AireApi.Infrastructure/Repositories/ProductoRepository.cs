@@ -63,7 +63,7 @@ namespace AireApi.Infrastructure.Repositories
         public async Task<bool> DeactivateAsync(int id)
         {
             using var conn = _db.CreateConnection();
-            var sql = "UPDATE aire.Productos SET Estado = 'Inactivo' WHERE IdProducto = @Id";
+            var sql = "UPDATE aire.Productos SET Estado = 'Inactivo', Stock = 0 WHERE IdProducto = @Id";
             var rows = await conn.ExecuteAsync(sql, new { Id = id });
             return rows > 0;
         }

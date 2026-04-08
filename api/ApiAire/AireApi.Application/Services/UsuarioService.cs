@@ -59,5 +59,8 @@ namespace AireApi.Application.Services
             if (usuario.Estado != "Activo") return null;
             return usuario;
         }
+
+        public async Task<bool> DeactivateAsync(int id)
+        => await _repo.DeactivateAsync(id);
     }
 }

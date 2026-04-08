@@ -46,4 +46,11 @@ public class UsuariosController : ControllerBase
         var usuario = await _service.LoginAsync(dto);
         return usuario == null ? Unauthorized("Credenciales inválidas") : Ok(usuario);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Deactivate(int id)
+    {
+        var result = await _service.DeactivateAsync(id);
+        return result ? NoContent() : NotFound();
+    }
 }

@@ -57,5 +57,13 @@ namespace AireApi.Infrastructure.Repositories
             var rows = await conn.ExecuteAsync(sql, usuario);
             return rows > 0;
         }
+
+        public async Task<bool> DeactivateAsync(int id)
+        {
+            using var conn = _db.CreateConnection();
+            var sql = "UPDATE aire.Usuarios SET Estado = 'Inactivo' WHERE IdUsuario = @Id";
+            var rows = await conn.ExecuteAsync(sql, new { Id = id });
+            return rows > 0;
+        }
     }
 }
