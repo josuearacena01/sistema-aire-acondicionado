@@ -51,7 +51,7 @@ namespace AireApi.Application.Services
             return await _repo.UpdateAsync(usuario);
         }
 
-        public async Task<Usuario?> LoginAsync(LoginDto dto)
+        public async Task<Usuario?> LoginAsync(LoginUnificadoDto dto)
         {
             var usuario = await _repo.GetByUsernameAsync(dto.Username);
             if (usuario == null) return null;

@@ -14,5 +14,6 @@ namespace AireApi.Domain.Interfaces
         Task<Cliente?> GetByCedulaAsync(string cedula);
         Task<int> CreateAsync(Cliente cliente);
         Task<bool> UpdateAsync(Cliente cliente);
+        Task<Cliente?> GetByUsernameAsync(string username);
     }
 }

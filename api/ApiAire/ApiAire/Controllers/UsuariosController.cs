@@ -40,13 +40,6 @@ public class UsuariosController : ControllerBase
         return result ? NoContent() : NotFound();
     }
 
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginDto dto)
-    {
-        var usuario = await _service.LoginAsync(dto);
-        return usuario == null ? Unauthorized("Credenciales inválidas") : Ok(usuario);
-    }
-
     [HttpDelete("{id}")]
     public async Task<IActionResult> Deactivate(int id)
     {

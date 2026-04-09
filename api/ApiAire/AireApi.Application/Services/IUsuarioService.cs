@@ -14,7 +14,7 @@ namespace AireApi.Application.Services
         Task<Usuario?> GetByIdAsync(int id);
         Task<int> CreateAsync(CreateUsuarioDto dto);
         Task<bool> UpdateAsync(int id, UpdateUsuarioDto dto);
-        Task<Usuario?> LoginAsync(LoginDto dto);
+        Task<Usuario?> LoginAsync(LoginUnificadoDto dto);
         Task<bool> DeactivateAsync(int id);
     }
 }

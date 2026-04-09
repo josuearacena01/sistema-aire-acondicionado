@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AireApi.Application.DTOs
 {
-    public class LoginDto
+    public class LoginUnificadoDto
     {
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

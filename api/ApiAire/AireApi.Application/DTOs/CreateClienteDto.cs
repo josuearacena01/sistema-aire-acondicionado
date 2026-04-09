@@ -17,5 +17,7 @@ namespace AireApi.Application.DTOs
         public string? Sector { get; set; }
         public string? Ciudad { get; set; }
         public string? Calle { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }

@@ -19,5 +19,7 @@ namespace AireApi.Domain.Entities
         public string? Ciudad { get; set; }
         public string? Calle { get; set; }
         public DateTime FechaRegistro { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }

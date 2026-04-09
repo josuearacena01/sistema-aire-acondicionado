@@ -43,9 +43,9 @@ namespace AireApi.Infrastructure.Repositories
         {
             using var conn = _db.CreateConnection();
             var sql = @"INSERT INTO aire.Clientes 
-            (IdProvincia, Cedula, Nombres, Apellidos, Telefono, Correo, Sector, Ciudad, Calle)
+            (IdProvincia, Cedula, Nombres, Apellidos, Telefono, Correo, Sector, Ciudad, Calle, Username, Password)
             VALUES 
-            (@IdProvincia, @Cedula, @Nombres, @Apellidos, @Telefono, @Correo, @Sector, @Ciudad, @Calle);
+            (@IdProvincia, @Cedula, @Nombres, @Apellidos, @Telefono, @Correo, @Sector, @Ciudad, @Calle, @Username, @Password);
             SELECT CAST(SCOPE_IDENTITY() AS INT)";
             return await conn.QuerySingleAsync<int>(sql, cliente);
         }
@@ -65,6 +65,13 @@ namespace AireApi.Infrastructure.Repositories
             WHERE IdCliente = @IdCliente";
             var rows = await conn.ExecuteAsync(sql, cliente);
             return rows > 0;
+        }
+
+        public async Task<Cliente?> GetByUsernameAsync(string username)
+        {
+            using var conn = _db.CreateConnection();
+            return await conn.QueryFirstOrDefaultAsync<Cliente>(
+                "SELECT * FROM aire.Clientes WHERE Username = @Username", new { Username = username });
         }
     }
 }
