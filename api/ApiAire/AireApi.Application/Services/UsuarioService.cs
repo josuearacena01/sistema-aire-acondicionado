@@ -41,12 +41,10 @@ namespace AireApi.Application.Services
             var usuario = await _repo.GetByIdAsync(id);
             if (usuario == null) return false;
 
-            usuario.Nombre = dto.Nombre;
-            usuario.Rol = dto.Rol;
-            usuario.Estado = dto.Estado;
-
-            if (!string.IsNullOrEmpty(dto.Password))
-                usuario.Password = dto.Password;
+            if (!string.IsNullOrEmpty(dto.Nombre)) usuario.Nombre = dto.Nombre;
+            if (!string.IsNullOrEmpty(dto.Rol)) usuario.Rol = dto.Rol;
+            if (!string.IsNullOrEmpty(dto.Estado)) usuario.Estado = dto.Estado;
+            if (!string.IsNullOrEmpty(dto.Password)) usuario.Password = dto.Password;
 
             return await _repo.UpdateAsync(usuario);
         }

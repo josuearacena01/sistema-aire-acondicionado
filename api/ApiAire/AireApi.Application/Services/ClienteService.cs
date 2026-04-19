@@ -39,7 +39,9 @@ namespace AireApi.Application.Services
                 Correo = dto.Correo,
                 Sector = dto.Sector,
                 Ciudad = dto.Ciudad,
-                Calle = dto.Calle
+                Calle = dto.Calle,
+                Username = dto.Username,
+                Password = dto.Password
             };
             return await _repo.CreateAsync(cliente);
         }
@@ -49,14 +51,14 @@ namespace AireApi.Application.Services
             var cliente = await _repo.GetByIdAsync(id);
             if (cliente == null) return false;
 
-            cliente.IdProvincia = dto.IdProvincia;
-            cliente.Nombres = dto.Nombres;
-            cliente.Apellidos = dto.Apellidos;
-            cliente.Telefono = dto.Telefono;
-            cliente.Correo = dto.Correo;
-            cliente.Sector = dto.Sector;
-            cliente.Ciudad = dto.Ciudad;
-            cliente.Calle = dto.Calle;
+            if (dto.IdProvincia.HasValue && dto.IdProvincia.Value > 0) cliente.IdProvincia = dto.IdProvincia;
+            if (!string.IsNullOrEmpty(dto.Nombres)) cliente.Nombres = dto.Nombres;
+            if (!string.IsNullOrEmpty(dto.Apellidos)) cliente.Apellidos = dto.Apellidos;
+            if (dto.Telefono != null) cliente.Telefono = dto.Telefono;
+            if (dto.Correo != null) cliente.Correo = dto.Correo;
+            if (dto.Sector != null) cliente.Sector = dto.Sector;
+            if (dto.Ciudad != null) cliente.Ciudad = dto.Ciudad;
+            if (dto.Calle != null) cliente.Calle = dto.Calle;
 
             return await _repo.UpdateAsync(cliente);
         }

@@ -9,8 +9,8 @@ namespace AireApi.Application.DTOs
     public class UpdateClienteDto
     {
         public int? IdProvincia { get; set; }
-        public string Nombres { get; set; } = string.Empty;
-        public string Apellidos { get; set; } = string.Empty;
+        public string? Nombres { get; set; }
+        public string? Apellidos { get; set; }
         public string? Telefono { get; set; }
         public string? Correo { get; set; }
         public string? Sector { get; set; }

@@ -40,9 +40,9 @@ namespace AireApi.Application.Services
             var vehiculo = await _repo.GetByIdAsync(id);
             if (vehiculo == null) return false;
 
-            vehiculo.IdMarca = dto.IdMarca;
-            vehiculo.IdModelo = dto.IdModelo;
-            vehiculo.Anio = dto.Anio;
+            if (dto.IdMarca > 0) vehiculo.IdMarca = dto.IdMarca;
+            if (dto.IdModelo > 0) vehiculo.IdModelo = dto.IdModelo;
+            if (dto.Anio > 0) vehiculo.Anio = dto.Anio;
 
             return await _repo.UpdateAsync(vehiculo);
         }

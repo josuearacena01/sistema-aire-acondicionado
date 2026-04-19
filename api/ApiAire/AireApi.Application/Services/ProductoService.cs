@@ -42,15 +42,19 @@ namespace AireApi.Application.Services
 
         public async Task<bool> UpdateAsync(int id, UpdateProductoDto dto)
         {
+            var productoView = await _repo.GetByIdAsync(id);
+            if (productoView == null) return false;
+
             var producto = new Producto
             {
                 IdProducto = id,
-                IdCategoria = dto.IdCategoria,
-                Nombre = dto.Nombre,
-                Precio = dto.Precio,
-                Stock = dto.Stock,
+                IdCategoria = dto.IdCategoria ?? productoView.IdCategoria,
+                Nombre = !string.IsNullOrEmpty(dto.Nombre) ? dto.Nombre : productoView.Nombre,
+                Precio = dto.Precio ?? productoView.Precio,
+                Stock = dto.Stock ?? productoView.Stock,
                 Imagen = dto.Imagen
             };
+
             return await _repo.UpdateAsync(producto);
         }
 

@@ -8,9 +8,9 @@ namespace AireApi.Application.DTOs
 {
     public class UpdateUsuarioDto
     {
-        public string Nombre { get; set; } = string.Empty;
+        public string? Nombre { get; set; }
         public string? Password { get; set; }
-        public string Rol { get; set; } = string.Empty;
-        public string Estado { get; set; } = string.Empty;
+        public string? Rol { get; set; }
+        public string? Estado { get; set; }
     }
 }
