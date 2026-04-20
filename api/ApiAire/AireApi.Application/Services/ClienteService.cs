@@ -1,4 +1,5 @@
 ﻿using AireApi.Application.DTOs;
+using AireApi.Application.Helpers;
 using AireApi.Domain.Entities;
 using AireApi.Domain.Interfaces;
 using System;
@@ -41,7 +42,7 @@ namespace AireApi.Application.Services
                 Ciudad = dto.Ciudad,
                 Calle = dto.Calle,
                 Username = dto.Username,
-                Password = dto.Password
+                Password = PasswordHasher.Hash(dto.Password)
             };
             return await _repo.CreateAsync(cliente);
         }

@@ -42,8 +42,8 @@ namespace AireApi.Infrastructure.Repositories
         public async Task<int> CreateAsync(Usuario usuario)
         {
             using var conn = _db.CreateConnection();
-            var sql = @"INSERT INTO aire.Usuarios (Nombre, Username, Password, Rol)
-            VALUES (@Nombre, @Username, @Password, @Rol);
+            var sql = @"INSERT INTO aire.Usuarios (Nombre, Username, Password, Rol, Estado)
+            VALUES (@Nombre, @Username, @Password, @Rol, @Estado);
             SELECT CAST(SCOPE_IDENTITY() AS INT)";
             return await conn.QuerySingleAsync<int>(sql, usuario);
         }

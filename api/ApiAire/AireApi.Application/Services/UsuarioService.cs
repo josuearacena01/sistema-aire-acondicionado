@@ -1,4 +1,5 @@
 ﻿using AireApi.Application.DTOs;
+using AireApi.Application.Helpers;
 using AireApi.Domain.Entities;
 using AireApi.Domain.Interfaces;
 using System;
@@ -30,7 +31,7 @@ namespace AireApi.Application.Services
             {
                 Nombre = dto.Nombre,
                 Username = dto.Username,
-                Password = dto.Password,
+                Password = PasswordHasher.Hash(dto.Password),
                 Rol = dto.Rol
             };
             return await _repo.CreateAsync(usuario);
@@ -44,19 +45,19 @@ namespace AireApi.Application.Services
             if (!string.IsNullOrEmpty(dto.Nombre)) usuario.Nombre = dto.Nombre;
             if (!string.IsNullOrEmpty(dto.Rol)) usuario.Rol = dto.Rol;
             if (!string.IsNullOrEmpty(dto.Estado)) usuario.Estado = dto.Estado;
-            if (!string.IsNullOrEmpty(dto.Password)) usuario.Password = dto.Password;
+            if (!string.IsNullOrEmpty(dto.Password)) usuario.Password = PasswordHasher.Hash(dto.Password);
 
             return await _repo.UpdateAsync(usuario);
         }
 
         public async Task<Usuario?> LoginAsync(LoginUnificadoDto dto)
         {
-            var usuario = await _repo.GetByUsernameAsync(dto.Username);
-            if (usuario == null) return null;
-            if (usuario.Password != dto.Password) return null;
-            if (usuario.Estado != "Activo") return null;
-            return usuario;
-        }
+        var usuario = await _repo.GetByUsernameAsync(dto.Username);
+        if (usuario == null) return null;
+        if (!PasswordHasher.Verify(dto.Password, usuario.Password)) return null;
+        if (usuario.Estado != "Activo") return null;
+        return usuario;
+    }
 
         public async Task<bool> DeactivateAsync(int id)
         => await _repo.DeactivateAsync(id);

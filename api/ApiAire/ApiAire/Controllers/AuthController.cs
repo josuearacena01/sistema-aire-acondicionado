@@ -1,5 +1,6 @@
 ﻿using AireApi.Application.DTOs;
 using AireApi.Domain.Interfaces;
+using AireApi.Application.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiAire.Controllers;
@@ -20,9 +21,9 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginUnificadoDto dto)
     {
-        // Buscar primero en Usuarios (Admin/Empleado)
+        // Buscar primero en Usuarios
         var usuario = await _usuarioRepo.GetByUsernameAsync(dto.Username);
-        if (usuario != null && usuario.Password == dto.Password && usuario.Estado == "Activo")
+        if (usuario != null && PasswordHasher.Verify(dto.Password, usuario.Password) && usuario.Estado == "Activo")
         {
             return Ok(new LoginResponseDto
             {
@@ -35,7 +36,7 @@ public class AuthController : ControllerBase
 
         // Buscar en Clientes
         var cliente = await _clienteRepo.GetByUsernameAsync(dto.Username);
-        if (cliente != null && cliente.Password == dto.Password)
+        if (cliente != null && PasswordHasher.Verify(dto.Password, cliente.Password))
         {
             return Ok(new LoginResponseDto
             {
